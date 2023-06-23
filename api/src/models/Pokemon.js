@@ -65,10 +65,6 @@ module.exports = (sequelize) => {
           min: 0,
         },
       },
-      inDB: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
     },
     { freezeTableName: true, timestamps: false }
   );
