@@ -1,6 +1,6 @@
 // Components
-import Navbar from "../../components/navbar/navbar"
-import Cards from "../../components/cards/cards"
+import Navbar from "../../components/Navbar/Navbar"
+import Cards from "../../components/Cards/Cards"
 
 const Home = () => {
     return (

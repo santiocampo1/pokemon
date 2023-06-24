@@ -1,5 +1,5 @@
 // Components
-import Card from "../card/card";
+import Card from "../Card/Card";
 
 const Cards = () => {
     return (
