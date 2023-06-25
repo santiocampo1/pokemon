@@ -1,7 +1,10 @@
 .search {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end; /* Alinea los elementos a la derecha */
+  position: absolute; /* Posición absoluta para desplazarlo */
+  top: 10px; /* Ajusta la distancia desde la parte superior */
+  right: 10px; /* Ajusta la distancia desde la derecha */
 }
 
 .search input {
@@ -15,7 +18,7 @@
 
 .search input:focus {
   outline: none;
-  box-shadow: 0 0 8px rgba(255, 165, 0, 0.8);
+  box-shadow: 0 0 8px rgba(242, 62, 26, 0.8);
 }
 
 .search button {
@@ -30,5 +33,6 @@
 }
 
 .search button:hover {
-  background-color: #ffc04d;
+  background-color: #caff4d;
+  color: black;
 }
