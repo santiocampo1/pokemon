@@ -1,10 +1,20 @@
-// Components
+import React from "react";
 import Card from "../Card/Card";
+import styles from "./Cards.module.css"
+
 
 const Cards = () => {
     return (
-        <div>
-            <h1>Este es el componente Cards</h1>
+        <div className={styles.container}>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
             <Card />
         </div>
     )

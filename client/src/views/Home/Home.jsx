@@ -1,4 +1,3 @@
-// Components
 import Navbar from "../../components/Navbar/Navbar"
 import Cards from "../../components/Cards/Cards"
 

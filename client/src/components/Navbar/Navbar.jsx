@@ -1,7 +1,13 @@
+import React from "react";
+import styles from "./Navbar.module.css"
+
 const Navbar = () => {
     return (
-        <div>
-            <h1>Este es el componente Navbar</h1>
+        <div className={styles.search}>
+            <form action="">
+                <input type="text" placeholder="¡tienes que atraparlos!" />
+                <button>Buscar</button>
+            </form>
         </div>
     )
 }

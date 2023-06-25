@@ -1,11 +1,8 @@
-// Dependencies
 import { Route, Routes } from "react-router-dom";
-// Components
 import Landing from "./views/Landing/Landing";
 import Home from "./views/Home/Home";
 import Detail from "./views/Detail/Detail";
 import Create from "./views/Create/Create";
-// Styles
 import "./App.css";
 
 function App() {
