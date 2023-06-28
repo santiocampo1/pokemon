@@ -36,9 +36,7 @@
   background-color: #ccff00;
   color: rgb(0, 0, 0);
   font-size: 20px;
-  border: none;
   border-radius: 30px;
-  cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
@@ -49,7 +47,7 @@
   right: 20px;
   transform: translate(0, -50%) scale(0.8);
 }
-.socialRoot {
+.social {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,11 +60,11 @@
   border-radius: 8px;
 }
 
-.socialRoot a {
+.social a {
   margin-right: 8px;
 }
 
-.socialRoot a:last-child {
+.social a:last-child {
   margin-right: 0;
 }
 

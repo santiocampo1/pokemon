@@ -10,9 +10,7 @@ const Landing = () => {
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>PokeApp</h1>
                 <div className={styles.buttonContainer}>
-
                     <NavLink className={styles.button} to="/home">¡Haz click aquí!</NavLink>
-
                 </div>
 
                 <div className={styles.audioContainer}>
@@ -20,7 +18,7 @@ const Landing = () => {
                 </div>
             </div>
 
-            <div className={styles.socialRoot}>
+            <div className={styles.social}>
                 <a href="https://www.linkedin.com/in/santiocampo/" target="_blank" rel="noopener noreferrer">
                     <img src="https://img.icons8.com/ios-filled/50/linkedin.png" alt="ícono de Linkedin" />
                 </a>

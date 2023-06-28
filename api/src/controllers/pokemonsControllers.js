@@ -83,7 +83,8 @@ const createPokemonDB = async (
   defense,
   speed,
   height,
-  weight
+  weight,
+  type
 ) => {
   return await Pokemon.findOrCreate({
     where: { name },
@@ -96,6 +97,7 @@ const createPokemonDB = async (
       speed,
       height,
       weight,
+      type,
     },
   });
 };

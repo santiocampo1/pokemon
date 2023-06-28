@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Navbar.module.css"
 
-const Navbar = () => {
+const Navbar = ({ handleOnChange, handleOnSubmit }) => {
     return (
         <div className={styles.search}>
-            <form action="">
-                <input type="text" placeholder="¡tienes que atraparlos!" />
-                <button>Buscar</button>
+            <form onChange={handleOnChange}>
+                <input type="search" placeholder="¡tienes que atraparlos!" />
+                <button type="submit" onClick={handleOnSubmit}>Buscar</button>
             </form>
         </div>
     )

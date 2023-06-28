@@ -36,7 +36,7 @@ const createPokemonHandler = async (req, res) => {
   const { id, name, image, hp, attack, defense, speed, height, weight } =
     req.body;
 
-  if (!id || !name || !image || !hp || !attack || !defense)
+  if (!name || !image || !hp || !attack || !defense)
     return res.status(400).send("Faltan datos obligatorios.");
 
   try {

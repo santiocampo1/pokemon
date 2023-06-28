@@ -1,0 +1,91 @@
+.container {
+  background-image: url("../../images/home.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+span {
+  color: red;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkboxContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkboxContainer label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.checkboxContainer input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.createButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.createButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botonBack {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e52301;
+  text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.botonBack:focus {
+  outline: none;
+}
+
+.botonBack:hover {
+  color: black;
+  background-color: #caff4d;
+}

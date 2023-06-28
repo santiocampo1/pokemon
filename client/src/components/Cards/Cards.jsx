@@ -3,19 +3,15 @@ import Card from "../Card/Card";
 import styles from "./Cards.module.css"
 
 
-const Cards = () => {
+const Cards = ({ allPokemons }) => {
+
+    const pokemons = allPokemons
+
     return (
         <div className={styles.container}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {pokemons?.map((pokemon) => {
+                return <Card pokemon={pokemon} />
+            })}
         </div>
     )
 }
