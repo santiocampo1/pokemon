@@ -40,7 +40,7 @@ const createPokemonHandler = async (req, res) => {
     return res.status(400).send("Faltan datos obligatorios.");
 
   try {
-    const response = await createPokemonDB(
+    await createPokemonDB(
       name,
       image,
       hp,
@@ -52,7 +52,7 @@ const createPokemonHandler = async (req, res) => {
       types
     );
 
-    res.status(200).json({ response });
+    res.status(200).send("Se ha creado el pokemon con éxito.");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

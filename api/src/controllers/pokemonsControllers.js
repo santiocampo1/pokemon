@@ -1,13 +1,6 @@
 const { Pokemon, Type } = require("../db"); // Modelo Pokemon
 const axios = require("axios");
 
-// name - id - sprites - stats - height - weight
-// sprites --> front-default === image
-// stats[0].base_stat --> hp
-// stats[1].base_stat --> attack
-// stats[2].base_stat --> defense
-// stats[5].base_stat --> speed
-
 // Función para traer 50 pokemones de la api.
 const getPokemonsApi = async () => {
   try {
@@ -38,7 +31,7 @@ const getPokemonsApi = async () => {
           speed,
           height,
           weight,
-          type,
+          types: type,
         };
       })
     );
@@ -48,8 +41,34 @@ const getPokemonsApi = async () => {
   }
 };
 
+// Función para obtener la info de la DB
+const getPokemonsDb = async () => {
+  const allPokemonsDb = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+    },
+  });
+
+  const mapPokeInfo = allPokemonsDb.map((pokemon) => {
+    return {
+      id: pokemon.id,
+      name: pokemon.name,
+      image: pokemon.image,
+      attack: pokemon.attack,
+      hp: pokemon.hp,
+      defense: pokemon.defense,
+      speed: pokemon.speed,
+      height: pokemon.height,
+      weight: pokemon.weight,
+      types: pokemon.types.map((type) => type.name),
+    };
+  });
+  return mapPokeInfo;
+};
+
 const getAllPokemons = async () => {
-  const pokemonsDataBase = await Pokemon.findAll();
+  const pokemonsDataBase = await getPokemonsDb();
   const pokemonsApi = await getPokemonsApi();
 
   const combinedPokemons = [...pokemonsDataBase, ...pokemonsApi];
@@ -85,15 +104,15 @@ const createPokemonDB = async (
   weight,
   types
 ) => {
-  // // Verificar que no exista en la api.
-  // const pokemonsApi = await getPokemonsApi();
-  // const existingPokemonApi = pokemonsApi.find(
-  //   (pokemonApi) => pokemonApi.name.toLowerCase() === name.toLowerCase()
-  // );
+  // Verificar que no exista en la api.
+  const pokemonsApi = await getPokemonsApi();
+  const existingPokemonApi = pokemonsApi.find(
+    (pokemonApi) => pokemonApi.name.toLowerCase() === name.toLowerCase()
+  );
 
-  // if (existingPokemonApi) {
-  //   throw new Error("¡Error! Ya existe un pokemon con ese nombre en la API.");
-  // }
+  if (existingPokemonApi) {
+    throw new Error("¡Error! Ya existe un pokemon con ese nombre en la API.");
+  }
 
   const [pokemon, created] = await Pokemon.findOrCreate({
     where: { name },
@@ -116,8 +135,7 @@ const createPokemonDB = async (
       "Error! Ya existe un pokemón con ese nombre en la base de datos."
     );
 
-  const type = await Type.findAll({ where: { name: types } }); // Buscar el tipo por nombre, validar con [op.in] si el tipo no se encuentra
-  // if (!type) throw new Error(Type '${types}' does not exist.)
+  const type = await Type.findAll({ where: { name: types } }); // Buscar el tipo por nombre
   pokemon.setTypes(type); // Establecer la relación entre el pokemon y el tipo
 };
 

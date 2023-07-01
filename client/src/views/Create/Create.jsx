@@ -5,18 +5,13 @@ import { postPokemon, getTypes } from "../../redux/actions"
 import styles from "./Create.module.css"
 
 const Create = () => {
-
-    // Función despachadora.
     const dispatch = useDispatch()
-    // Me traigo los types.
     const allTypes = useSelector((state) => state.allTypes)
 
-    // Cuándo el componente se monta, me traigo todos los types.
     useEffect(() => {
         dispatch(getTypes())
     }, [dispatch])
 
-    // El estado input guarda los valores de entrada del formulario.
     const [input, setInput] = useState({
         name: "",
         image: "",
@@ -26,10 +21,9 @@ const Create = () => {
         speed: null,
         height: null,
         weight: null,
-        type: ""
+        types: []
     })
 
-    // El estado error almacena los posibles errores relacionados con los campos del formulario.
     const [error, setError] = useState({
         name: "",
         image: "",
@@ -42,10 +36,8 @@ const Create = () => {
         type: ""
     })
 
-    // El estado selectedTypes almacena los types seleccionados en forma de array.
-    const [selectedTypes, setSelectedTypes] = useState([])
+    const [types, setTypes] = useState([])
 
-    // La función validate realiza la validación de los campos.
     const validate = (input) => {
 
         const errors = {
@@ -95,7 +87,6 @@ const Create = () => {
         setError(errors);
     }
 
-
     // La función handleOnChange se utiliza para manejar los cambios en los campos del formulario.
     const handleOnChange = (event) => {
         setInput({
@@ -107,15 +98,25 @@ const Create = () => {
             ...input,
             [event.target.name]: event.target.value
         })
-
     }
 
     // La función handleOnSubmit despacha la información que el usuario proporciona.
     const handleOnSubmit = (event) => {
         event.preventDefault()
+
+        setInput({
+            ...input,
+            types: input.types.push(...types),
+        });
+
         dispatch(postPokemon(input))
     }
 
+
+    const handleTypes = (event) => {
+        setTypes([...types,
+        event.target.value]);
+    }
 
     return (
 
@@ -129,7 +130,7 @@ const Create = () => {
 
             <form onSubmit={handleOnSubmit}>
                 <div>
-                    <label htmlFor="name">Name</label>
+                    <label>Name</label>
                     <input
                         name="name"
                         id="name"
@@ -141,7 +142,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="image">Image</label>
+                    <label>Image</label>
                     <input
                         name="image"
                         id="image"
@@ -153,7 +154,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="hp">HP</label>
+                    <label>HP</label>
                     <input
                         name="hp"
                         id="hp"
@@ -165,7 +166,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="attack">Attack</label>
+                    <label>Attack</label>
                     <input
                         name="attack"
                         id="attack"
@@ -177,7 +178,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="defense">Defense</label>
+                    <label>Defense</label>
                     <input
                         name="defense"
                         id="defense"
@@ -189,7 +190,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="speed">Speed</label>
+                    <label>Speed</label>
                     <input
                         name="speed"
                         id="speed"
@@ -201,7 +202,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="height">Height</label>
+                    <label>Height</label>
                     <input
                         name="height"
                         id="height"
@@ -213,7 +214,7 @@ const Create = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="weight">Weight</label>
+                    <label>Weight</label>
                     <input
                         name="weight"
                         id="weight"
@@ -231,15 +232,14 @@ const Create = () => {
                     <div className={styles.checkboxContainer}>
                         {allTypes?.map((type) => (
                             <div key={type.name} className={styles.checkboxItem}>
-                                <label htmlFor={type.name} className={styles.checkboxLabel}>
+                                <label className={styles.checkboxLabel}>
                                     {type.name}
                                 </label>
                                 <input
                                     type="checkbox"
-                                    id={type.name}
-                                    name={type.name}
+                                    name={"types"}
                                     value={type.name}
-                                    onChange={handleOnChange}
+                                    onChange={handleTypes}
                                     className={styles.checkboxInput}
                                 />
                             </div>
