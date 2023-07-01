@@ -33,7 +33,7 @@ const getPokemonIdHandler = async (req, res) => {
 };
 
 const createPokemonHandler = async (req, res) => {
-  const { id, name, image, hp, attack, defense, speed, height, weight } =
+  const { name, image, hp, attack, defense, speed, height, weight, types } =
     req.body;
 
   if (!name || !image || !hp || !attack || !defense)
@@ -41,7 +41,6 @@ const createPokemonHandler = async (req, res) => {
 
   try {
     const response = await createPokemonDB(
-      id,
       name,
       image,
       hp,
@@ -49,10 +48,11 @@ const createPokemonHandler = async (req, res) => {
       defense,
       speed,
       height,
-      weight
+      weight,
+      types
     );
 
-    res.status(200).send("El pokemon ha sido creado exitosamente");
+    res.status(200).json({ response });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

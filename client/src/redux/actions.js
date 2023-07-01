@@ -1,5 +1,12 @@
 import axios from "axios";
-import { GET_POKEMONS, GET_BY_NAME, GET_TYPES } from "./action_types";
+import {
+  GET_POKEMONS,
+  GET_BY_NAME,
+  GET_TYPES,
+  ORDER,
+  POST_POKEMON,
+  FILTER,
+} from "./action_types";
 
 // Actions
 export const getPokemons = () => {
@@ -50,9 +57,31 @@ export const postPokemon = (info) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("http://localhost:3001/pokemons", info);
-      console.log(response);
+      alert("El pokemón ha sido creado exitosamente.");
+      return dispatch({
+        type: POST_POKEMON,
+        payload: response.status,
+      });
     } catch (error) {
-      console.log(error);
+      alert("No se ha podido crear el Pokemón. Verifica que no esté repetido.");
     }
+  };
+};
+
+export const order = (orden) => {
+  return (dispatch) => {
+    return dispatch({
+      type: ORDER,
+      payload: orden,
+    });
+  };
+};
+
+export const filterTypes = (tipo) => {
+  return (dispatch) => {
+    return dispatch({
+      type: FILTER,
+      payload: tipo,
+    });
   };
 };

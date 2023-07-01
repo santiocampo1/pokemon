@@ -32,6 +32,30 @@
   cursor: pointer;
 }
 
+.createBoton {
+  display: inline-block;
+  margin: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.createBoton a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.createBoton a:hover {
+  transform: scale(1.1);
+}
+
 .search button:hover {
   background-color: #caff4d;
   color: black;

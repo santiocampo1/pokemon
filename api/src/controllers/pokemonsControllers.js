@@ -1,4 +1,4 @@
-const { Pokemon } = require("../db"); // Modelo Pokemon
+const { Pokemon, Type } = require("../db"); // Modelo Pokemon
 const axios = require("axios");
 
 // name - id - sprites - stats - height - weight
@@ -21,7 +21,7 @@ const getPokemonsApi = async () => {
         const response = await axios.get(pokemon.url);
         const pokemonData = response.data;
         const { id, sprites, stats, height, weight, types } = pokemonData;
-        const image = sprites.front_default;
+        const image = sprites.other.dream_world.front_default;
         const hp = stats[0].base_stat;
         const attack = stats[1].base_stat;
         const defense = stats[2].base_stat;
@@ -75,7 +75,6 @@ const getPokemonByName = async (name) => {
 };
 
 const createPokemonDB = async (
-  id,
   name,
   image,
   hp,
@@ -84,9 +83,19 @@ const createPokemonDB = async (
   speed,
   height,
   weight,
-  type
+  types
 ) => {
-  return await Pokemon.findOrCreate({
+  // // Verificar que no exista en la api.
+  // const pokemonsApi = await getPokemonsApi();
+  // const existingPokemonApi = pokemonsApi.find(
+  //   (pokemonApi) => pokemonApi.name.toLowerCase() === name.toLowerCase()
+  // );
+
+  // if (existingPokemonApi) {
+  //   throw new Error("¡Error! Ya existe un pokemon con ese nombre en la API.");
+  // }
+
+  const [pokemon, created] = await Pokemon.findOrCreate({
     where: { name },
     defaults: {
       name,
@@ -97,9 +106,19 @@ const createPokemonDB = async (
       speed,
       height,
       weight,
-      type,
+      types,
     },
   });
+
+  // Verificar que no exista en la bdd.
+  if (!created)
+    throw new Error(
+      "Error! Ya existe un pokemón con ese nombre en la base de datos."
+    );
+
+  const type = await Type.findAll({ where: { name: types } }); // Buscar el tipo por nombre, validar con [op.in] si el tipo no se encuentra
+  // if (!type) throw new Error(Type '${types}' does not exist.)
+  pokemon.setTypes(type); // Establecer la relación entre el pokemon y el tipo
 };
 
 const getPokemonById = async (id) => {

@@ -4,9 +4,8 @@ import styles from "./Card.module.css"
 
 const Card = ({ pokemon }) => {
 
+    // Destructuro la info del pokemon que necesito renderizar.
     const { id, name, hp, image, attack, defense, speed, height, weight, type } = pokemon
-
-
 
     return (
         <div className={`${styles.content} ${styles.card}`}>

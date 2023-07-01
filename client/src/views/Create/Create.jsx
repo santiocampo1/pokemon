@@ -29,7 +29,7 @@ const Create = () => {
         type: ""
     })
 
-    // El estado error almacena los posibles errores relacionados con los campos del formulario
+    // El estado error almacena los posibles errores relacionados con los campos del formulario.
     const [error, setError] = useState({
         name: "",
         image: "",
@@ -41,6 +41,9 @@ const Create = () => {
         weight: null,
         type: ""
     })
+
+    // El estado selectedTypes almacena los types seleccionados en forma de array.
+    const [selectedTypes, setSelectedTypes] = useState([])
 
     // La función validate realiza la validación de los campos.
     const validate = (input) => {
@@ -226,7 +229,7 @@ const Create = () => {
                         Types
                     </label>
                     <div className={styles.checkboxContainer}>
-                        {allTypes.map((type) => (
+                        {allTypes?.map((type) => (
                             <div key={type.name} className={styles.checkboxItem}>
                                 <label htmlFor={type.name} className={styles.checkboxLabel}>
                                     {type.name}
