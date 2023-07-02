@@ -3,9 +3,11 @@ import {
   GET_POKEMONS,
   GET_BY_NAME,
   GET_TYPES,
-  ORDER,
+  ORDER_BY_NAME,
+  ORDER_BY_ATTACK,
   POST_POKEMON,
-  FILTER,
+  FILTER_BY_TYPE,
+  FILTER_BY_ORIGIN,
 } from "./action_types";
 
 // Actions
@@ -68,20 +70,38 @@ export const postPokemon = (info) => {
   };
 };
 
-export const order = (orden) => {
+export const orderByName = (orden) => {
   return (dispatch) => {
     return dispatch({
-      type: ORDER,
+      type: ORDER_BY_NAME,
       payload: orden,
     });
   };
 };
 
-export const filterTypes = (tipo) => {
+export const orderByAttack = (orden) => {
   return (dispatch) => {
     return dispatch({
-      type: FILTER,
+      type: ORDER_BY_ATTACK,
+      payload: orden,
+    });
+  };
+};
+
+export const filterByType = (tipo) => {
+  return (dispatch) => {
+    return dispatch({
+      type: FILTER_BY_TYPE,
       payload: tipo,
+    });
+  };
+};
+
+export const filterByOrigin = (origen) => {
+  return (dispatch) => {
+    return dispatch({
+      type: FILTER_BY_ORIGIN,
+      payload: origen,
     });
   };
 };

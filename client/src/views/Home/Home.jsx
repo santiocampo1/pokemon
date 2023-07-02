@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getByName, getPokemons, getTypes, order, filterTypes } from "../../redux/actions"
+import { getByName, getPokemons, getTypes, orderByName, orderByAttack, filterByType, filterByOrigin } from "../../redux/actions"
 import Navbar from "../../components/Navbar/Navbar"
 import Cards from "../../components/Cards/Cards"
 import styles from "./Home.module.css"
@@ -14,10 +14,14 @@ const Home = () => {
     // Suscripción a los estados globales con los que trabajará Home.
     const allPokemons = useSelector((state) => state.allPokemons)
     const allTypes = useSelector((state) => state.allTypes)
-    const pokemonsOrdered = useSelector((state) => state.pokemonsOrdered)
+    const pokemonsOrderedByName = useSelector((state) => state.pokemonsOrderedByName)
+    const pokemonsOrderedByAttack = useSelector((state) => state.pokemonsOrderedByAttack)
     const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered)
-    const orders = useSelector((state) => state.orders)
-    const filters = useSelector((state) => state.filters)
+    const pokemonsByOrigin = useSelector((state) => state.pokemonsByOrigin)
+    const orderName = useSelector((state) => state.orderName)
+    const orderAttack = useSelector((state) => state.orderAttack)
+    const filterType = useSelector((state) => state.filterType)
+    const filterOrigen = useSelector((state) => state.filterOrigen)
 
     // Estado local searchString que inicializo como un string vacío.
     const [searchString, setSearchString] = useState("")
@@ -42,38 +46,60 @@ const Home = () => {
 
 
     // Función handleOrder que despacha la action.
-    const handleOrder = (event) => {
-        dispatch(order(event.target.value))
+    const handleOrderByName = (event) => {
+        dispatch(orderByName(event.target.value))
     }
 
-    const handleType = (event) => {
-        dispatch(filterTypes(event.target.value))
+    const handleOrderByAttack = (event) => {
+        dispatch(orderByAttack(event.target.value))
     }
 
+    const handleFilterByType = (event) => {
+        // console.log(event.target.value);
+        dispatch(filterByType(event.target.value))
+    }
 
+    const handleFilterByOrigin = (event) => {
+        dispatch(filterByOrigin(event.target.value))
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.contentWrapper}>
                 <h1>PokeHome</h1>
-                <label>Ordenar según nombre y ataque</label>
-                <select onChange={handleOrder} name="" id="">
-                    <option defaultChecked value="0">-</option>
-                    <option value="ascendente">ascendente</option>
-                    <option value="descendente">descendente</option>
+                <label>Ordenar pokemons según su nombre</label>
+                <select onChange={handleOrderByName}>
+                    <option defaultChecked value="-">-</option>
+                    <option value="descendente">A-Z</option>
+                    <option value="ascendente">Z-A</option>
+                </select>
+                <label>Ordenar pokemons según su valor de ataque</label>
+                <select onChange={handleOrderByAttack}>
+                    <option defaultChecked value="-">-</option>
+                    <option value="descendente">De menos a más</option>
+                    <option value="ascendente">De más a menos</option>
                 </select>
                 <label>Filtrar por Tipo</label>
-                <select onChange={handleType} name="" id="">
+                <select onChange={handleFilterByType}>
+                    <option defaultChecked value="-">-</option>
                     {allTypes.map((tipo) => {
                         return (
                             <option value={tipo.name}>{tipo.name}</option>
                         )
                     })}
                 </select>
-                {orders && <Cards allPokemons={pokemonsOrdered} />}
-                {filters && <Cards allPokemons={pokemonsFiltered} />}
+                <label>Filtrar por Origen</label>
+                <select onChange={handleFilterByOrigin}>
+                    <option value="-">-</option>
+                    <option value="Base de datos">Base de datos</option>
+                    <option value="API">API</option>
+                </select>
+                {orderName && <Cards allPokemons={pokemonsOrderedByName} />}
+                {orderAttack && <Cards allPokemons={pokemonsOrderedByAttack} />}
+                {filterType && <Cards allPokemons={pokemonsFiltered} />}
+                {filterOrigen && <Cards allPokemons={pokemonsByOrigin} />}
                 <Navbar handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit} />
-                <Cards allPokemons={allPokemons} />
+                {!orderName && !orderAttack && !filterType && !filterOrigen && <Cards allPokemons={allPokemons} />}
             </div>
         </div>
     )

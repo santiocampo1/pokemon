@@ -3,18 +3,24 @@ import {
   GET_BY_NAME,
   GET_TYPES,
   CREATE_POKEMON,
-  ORDER,
-  FILTER,
+  ORDER_BY_NAME,
+  FILTER_BY_TYPE,
+  ORDER_BY_ATTACK,
+  FILTER_BY_ORIGIN,
 } from "./action_types";
 
 // Configuración de los estados globales.
 let initialState = {
   allPokemons: [],
   allTypes: [],
-  pokemonsOrdered: [],
+  pokemonsOrderedByName: [],
+  pokemonsOrderedByAttack: [],
   pokemonsFiltered: [],
-  orders: false,
-  filters: false,
+  pokemonsByOrigin: [],
+  orderName: false,
+  orderAttack: false,
+  filterType: false,
+  filterOrigen: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,53 +48,111 @@ const reducer = (state = initialState, action) => {
         ...state,
       };
 
-    case ORDER:
+    case ORDER_BY_NAME:
       if (action.payload === "ascendente") {
         return {
           ...state,
-          orders: true,
-          pokemonsOrdered: [...state.allPokemons].sort((prevPoke, nextPoke) => {
-            if (
-              prevPoke.name > nextPoke.name &&
-              prevPoke.attack > nextPoke.attack
-            )
-              return -1;
-            if (
-              prevPoke.name < nextPoke.name &&
-              prevPoke.attack < nextPoke.attack
-            )
-              return 1;
-            return 0;
-          }),
+          orderName: true,
+          pokemonsOrderedByName: [...state.allPokemons].sort(
+            (prevPoke, nextPoke) => {
+              if (prevPoke.name > nextPoke.name) return -1;
+              if (prevPoke.name < nextPoke.name) return 1;
+              return 0;
+            }
+          ),
         };
       } else if (action.payload === "descendente") {
         return {
           ...state,
-          orders: true,
-          pokemonsOrdered: [...state.allPokemons].sort((prevPoke, nextPoke) => {
-            if (
-              prevPoke.name > nextPoke.name &&
-              prevPoke.attack > nextPoke.attack
-            )
-              return 1;
-            if (
-              prevPoke.name < nextPoke.name &&
-              prevPoke.attack < nextPoke.attack
-            )
-              return -1;
-            return 0;
-          }),
+          orderName: true,
+          pokemonsOrderedByName: [...state.allPokemons].sort(
+            (prevPoke, nextPoke) => {
+              if (prevPoke.name > nextPoke.name) return 1;
+              if (prevPoke.name < nextPoke.name) return -1;
+              return 0;
+            }
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          orderName: false,
         };
       }
 
-    case FILTER:
+    case ORDER_BY_ATTACK:
+      if (action.payload === "ascendente") {
+        return {
+          ...state,
+          orderAttack: true,
+          pokemonsOrderedByAttack: [...state.allPokemons].sort(
+            (prevPoke, nextPoke) => {
+              if (prevPoke.attack > nextPoke.attack) return -1;
+              if (prevPoke.attack < nextPoke.attack) return 1;
+              return 0;
+            }
+          ),
+        };
+      } else if (action.payload === "descendente") {
+        return {
+          ...state,
+          orderAttack: true,
+          pokemonsOrderedByAttack: [...state.allPokemons].sort(
+            (prevPoke, nextPoke) => {
+              if (prevPoke.attack > nextPoke.attack) return 1;
+              if (prevPoke.attack < nextPoke.attack) return -1;
+              return 0;
+            }
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          orderAttack: false,
+        };
+      }
+
+    case FILTER_BY_TYPE:
+      let pokemonsTypeFiltered;
+      if (action.payload === "-") {
+        return {
+          ...state,
+          filterType: false,
+        };
+      } else {
+        pokemonsTypeFiltered = state.allPokemons.filter((poke) =>
+          poke.types.includes(action.payload)
+        );
+      }
       return {
         ...state,
-        pokemonsFiltered: [...state.allPokemons].filter((pokemon) =>
-          pokemon.type.includes(action.payload)
-        ),
-        filters: true,
+        filterType: true,
+        pokemonsFiltered: pokemonsTypeFiltered,
       };
+
+    case FILTER_BY_ORIGIN:
+      if (action.payload === "Base de datos") {
+        return {
+          ...state,
+          filterOrigen: true,
+          pokemonsByOrigin: [...state.allPokemons].filter(
+            (poke) => typeof poke.id === "string"
+          ),
+        };
+      } else if (action.payload === "API") {
+        return {
+          ...state,
+          filterOrigen: true,
+          pokemonsByOrigin: [...state.allPokemons].filter(
+            (poke) => typeof poke.id === "number"
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          filterOrigen: false,
+        };
+      }
 
     default:
       return state;
