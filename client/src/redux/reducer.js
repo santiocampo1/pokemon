@@ -7,6 +7,7 @@ import {
   FILTER_BY_TYPE,
   ORDER_BY_ATTACK,
   FILTER_BY_ORIGIN,
+  GET_BY_ID,
 } from "./action_types";
 
 // Configuración de los estados globales.
@@ -17,6 +18,7 @@ let initialState = {
   pokemonsOrderedByAttack: [],
   pokemonsFiltered: [],
   pokemonsByOrigin: [],
+  pokemonDetail: {},
   orderName: false,
   orderAttack: false,
   filterType: false,
@@ -35,6 +37,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allPokemons: action.payload,
+      };
+
+    case GET_BY_ID:
+      return {
+        ...state,
+        pokemonDetail: action.payload,
       };
 
     case GET_TYPES:

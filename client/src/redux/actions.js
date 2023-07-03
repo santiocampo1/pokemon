@@ -8,6 +8,7 @@ import {
   POST_POKEMON,
   FILTER_BY_TYPE,
   FILTER_BY_ORIGIN,
+  GET_BY_ID,
 } from "./action_types";
 
 // Actions
@@ -38,6 +39,20 @@ export const getByName = (name) => {
     };
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getById = (id) => {
+  try {
+    return async (dispatch) => {
+      const response = await axios.get(`http://localhost:3001/pokemons/${id}`);
+      return dispatch({
+        type: GET_BY_ID,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
