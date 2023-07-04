@@ -5,12 +5,13 @@ import styles from "./Card.module.css"
 const Card = ({ pokemon }) => {
 
     // Destructuro la info del pokemon que necesito renderizar.
-    const { id, name, hp, image, attack, defense, speed, height, weight, types } = pokemon
+    const { id, name, image, types } = pokemon
+    let key = id
 
     return (
-        <div className={`${styles.content} ${styles.card}`}>
-            <div>
-                <NavLink to={`/home/${id}`}>
+        <div>
+            <div className={styles.card}>
+                <NavLink className={styles.nav} to={`/home/${key}`}>
                     <h2 className={styles.title}>{name.toUpperCase()}</h2>
                     <div className={styles.info}>
                         <img className={styles.img} src={image} alt="Pokemon" />

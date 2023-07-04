@@ -33,9 +33,9 @@ const Detail = () => {
             <h3>HP: {hp}</h3>
             <h3>Attack: {attack}</h3>
             <h3>Defense: {defense}</h3>
-            <h3>Speed: {speed}</h3>
-            <h3>Height: {height}</h3>
-            <h3>Weight: {weight}</h3>
+            {speed && <h3>Speed: {speed}</h3>}
+            {height && <h3>Height: {height}</h3>}
+            {weight && <h3>Weight: {weight}</h3>}
             <h3>Types: {types?.join(", ")}</h3>
         </div>
     )

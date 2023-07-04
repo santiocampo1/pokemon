@@ -1,0 +1,49 @@
+/* Estilos para las etiquetas y selectores */
+.filters label {
+  margin-right: 10px;
+}
+
+.filters select {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Estilos para el contenedor del paginado */
+.paginado {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Estilos para los botones de paginado */
+.paginado button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paginado button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginado button:not(:disabled):hover {
+  background-color: #ff775e;
+}
+
+.paginado button:not(:disabled):focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 94, 58, 0.5);
+}
+
+/* Efecto de sombra al hacer clic */
+.paginado button:not(:disabled):active {
+  box-shadow: 0 0 5px rgba(255, 94, 58, 0.8);
+}

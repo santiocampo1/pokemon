@@ -22,7 +22,7 @@ let initialState = {
   orderName: false,
   orderAttack: false,
   filterType: false,
-  filterOrigen: false,
+  filterOrigin: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -142,7 +142,7 @@ const reducer = (state = initialState, action) => {
       if (action.payload === "Base de datos") {
         return {
           ...state,
-          filterOrigen: true,
+          filterOrigin: true,
           pokemonsByOrigin: [...state.allPokemons].filter(
             (poke) => typeof poke.id === "string"
           ),
@@ -150,7 +150,7 @@ const reducer = (state = initialState, action) => {
       } else if (action.payload === "API") {
         return {
           ...state,
-          filterOrigen: true,
+          filterOrigin: true,
           pokemonsByOrigin: [...state.allPokemons].filter(
             (poke) => typeof poke.id === "number"
           ),
@@ -158,7 +158,7 @@ const reducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          filterOrigen: false,
+          filterOrigin: false,
         };
       }
 
