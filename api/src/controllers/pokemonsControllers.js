@@ -1,7 +1,7 @@
 const { Pokemon, Type } = require("../db"); // Modelo Pokemon
 const axios = require("axios");
 
-// Función para traer 50 pokemones de la api.
+// Función controller que trae 50 pokemones de la API de pokemon.
 const getPokemonsApi = async () => {
   try {
     const response = await axios.get(
@@ -41,7 +41,7 @@ const getPokemonsApi = async () => {
   }
 };
 
-// Función para obtener la info de la DB
+// Función controller que devuelve los pokemons de la Base de Datos.
 const getPokemonsDb = async () => {
   const allPokemonsDb = await Pokemon.findAll({
     include: {
@@ -52,11 +52,11 @@ const getPokemonsDb = async () => {
 
   const mapPokeInfo = allPokemonsDb.map((pokemon) => {
     return {
-      id: pokemon.id,
       name: pokemon.name,
+      id: pokemon.id,
       image: pokemon.image,
-      attack: pokemon.attack,
       hp: pokemon.hp,
+      attack: pokemon.attack,
       defense: pokemon.defense,
       speed: pokemon.speed,
       height: pokemon.height,
@@ -67,6 +67,7 @@ const getPokemonsDb = async () => {
   return mapPokeInfo;
 };
 
+// Función controller que combina y devuelve, los pokemons de la API y los de la Base de Datos.
 const getAllPokemons = async () => {
   const pokemonsDataBase = await getPokemonsDb();
   const pokemonsApi = await getPokemonsApi();
@@ -75,24 +76,22 @@ const getAllPokemons = async () => {
   return combinedPokemons;
 };
 
+// Función controller que devuelve un pokemon según el nombre pasado por query.
 const getPokemonByName = async (name) => {
   const lowerName = name.toLowerCase();
 
-  const nameDB = await Pokemon.findOne({ where: { name: lowerName } });
-  if (!nameDB) {
-    const pokemonsApi = await getPokemonsApi();
-    const pokemonName = pokemonsApi.filter(
-      (pokemon) => pokemon.name === lowerName
-    );
+  const pokemonsApi = await getPokemonsApi();
 
-    if (!pokemonName) throw new Error("El pokemon que está buscando no existe");
+  const pokemonName = pokemonsApi.filter(
+    (pokemon) => pokemon.name === lowerName
+  );
 
-    return pokemonName;
-  }
+  if (!pokemonName) throw new Error("El pokemon que está buscando no existe");
 
-  return nameDB;
+  return pokemonName;
 };
 
+// Función controller que crea un pokemón en la Base de Datos, según los parámetros recibidos.
 const createPokemonDB = async (
   name,
   image,
@@ -135,12 +134,13 @@ const createPokemonDB = async (
       "Error! Ya existe un pokemón con ese nombre en la base de datos."
     );
 
-  const type = await Type.findAll({ where: { name: types } }); // Buscar el tipo por nombre
-  pokemon.setTypes(type); // Establecer la relación entre el pokemon y el tipo
+  const type = await Type.findAll({ where: { name: types } });
+  pokemon.setTypes(type);
 };
 
+// Función controller que devuelve el pokemon según el Id recibido por parámetro.
 const getPokemonById = async (id) => {
-  const source = isNaN(id) ? "bdd" : "api"; // true | false
+  const source = isNaN(id) ? "bdd" : "api";
 
   if (source === "api") {
     const pokemonsApi = await getPokemonsApi();

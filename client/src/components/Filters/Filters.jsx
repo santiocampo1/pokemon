@@ -43,7 +43,10 @@ const Filters = () => {
     const indexOfFirstCard = indexOfLastCard - cardsPerPage
 
     const getCurrentPageCards = (cards) => {
-        return cards.slice(indexOfFirstCard, indexOfLastCard)
+        if (Array.isArray(cards)) {
+            return cards.slice(indexOfFirstCard, indexOfLastCard)
+        }
+
     }
 
     return (

@@ -1,5 +1,6 @@
 const { getTypes } = require("../controllers/typeControllers");
 
+// Handler para obtener los types.
 const getTypesHandler = async (req, res) => {
   try {
     const typesPokemons = await getTypes();

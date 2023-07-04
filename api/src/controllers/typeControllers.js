@@ -1,6 +1,7 @@
 const { Type } = require("../db"); // Modelo Type
 const axios = require("axios");
 
+// Función controller que devuelve los types.
 const getTypes = async () => {
   const typesFromDB = await Type.findAll();
 
@@ -10,7 +11,7 @@ const getTypes = async () => {
 
     const types = dataType.map((type) => type.name);
 
-    await Type.bulkCreate(types.map((type) => ({ name: type }))); // Guardar los tipos de la api en la base de datos
+    await Type.bulkCreate(types.map((type) => ({ name: type })));
   }
 
   const types = await Type.findAll();

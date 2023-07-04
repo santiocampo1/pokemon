@@ -36,7 +36,7 @@ const Create = () => {
         type: ""
     })
 
-    const [types, setTypes] = useState([])
+    const [selectedTypes, setSelectedTypes] = useState([])
 
     const validate = (input) => {
 
@@ -106,7 +106,7 @@ const Create = () => {
 
         setInput({
             ...input,
-            types: input.types.push(...types),
+            types: selectedTypes,
         });
 
         dispatch(postPokemon(input))
@@ -114,8 +114,15 @@ const Create = () => {
 
 
     const handleTypes = (event) => {
-        setTypes([...types,
-        event.target.value]);
+        const selectedType = event.target.value;
+        const updatedTypes = input.types.includes(selectedType)
+            ? input.types.filter((type) => type !== selectedType)
+            : [...input.types, selectedType];
+
+        setInput({
+            ...input,
+            types: updatedTypes,
+        });
     }
 
     return (
@@ -238,6 +245,7 @@ const Create = () => {
                                 <input
                                     type="checkbox"
                                     name={"types"}
+                                    checked={input.types.includes(type.name)}
                                     value={type.name}
                                     onChange={handleTypes}
                                     className={styles.checkboxInput}
