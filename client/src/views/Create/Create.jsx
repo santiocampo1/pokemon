@@ -27,12 +27,12 @@ const Create = () => {
     const [error, setError] = useState({
         name: "",
         image: "",
-        hp: null,
-        attack: null,
-        defense: null,
-        speed: null,
-        height: null,
-        weight: null,
+        hp: "",
+        attack: "",
+        defense: "",
+        speed: "",
+        height: "",
+        weight: "",
         type: ""
     })
 
@@ -40,15 +40,16 @@ const Create = () => {
 
     const validate = (input) => {
 
+        // principio de inmutabilidad de React.
         const errors = {
             name: "",
             image: "",
-            hp: null,
-            attack: null,
-            defense: null,
-            speed: null,
-            height: null,
-            weight: null,
+            hp: "",
+            attack: "",
+            defense: "",
+            speed: "",
+            height: "",
+            weight: "",
             type: "",
         }
 
@@ -112,9 +113,13 @@ const Create = () => {
         dispatch(postPokemon(input))
     }
 
-
     const handleTypes = (event) => {
+        // updatedTypes valida si en el estado local input se incluye el selectedType.
+        // si es cierto que se incluye, filtra cada type distinto al seleccionado.
+        // si no es cierto que se incluye, se devuelve una copia del input.types más el seleccionado.
+
         const selectedType = event.target.value;
+
         const updatedTypes = input.types.includes(selectedType)
             ? input.types.filter((type) => type !== selectedType)
             : [...input.types, selectedType];

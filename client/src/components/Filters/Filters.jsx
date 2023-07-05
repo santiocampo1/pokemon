@@ -46,7 +46,6 @@ const Filters = () => {
         if (Array.isArray(cards)) {
             return cards.slice(indexOfFirstCard, indexOfLastCard)
         }
-
     }
 
     return (

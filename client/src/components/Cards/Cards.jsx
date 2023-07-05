@@ -4,7 +4,7 @@ import { getPokemons } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css"
 
-
+// El componente Cards recibirá por props un array desde Filters.
 const Cards = ({ allPokemons }) => {
     const dispatch = useDispatch()
     const pokemons = allPokemons

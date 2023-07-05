@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemons, getTypes } from "../../redux/actions";
 import Navbar from "../../components/Navbar/Navbar";

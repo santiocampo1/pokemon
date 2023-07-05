@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import styles from "./Card.module.css"
 
+// El componente Card recibirá por props un array desde Cards
 const Card = ({ pokemon }) => {
 
-    // Destructuro la info del pokemon que necesito renderizar.
     const { id, name, image, types } = pokemon
     let key = id
 

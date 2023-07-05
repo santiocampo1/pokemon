@@ -14,7 +14,6 @@ const Navbar = () => {
     const handleOnChange = (event) => {
         event.preventDefault();
         setSearchString(event.target.value);
-
     };
 
     const handleOnSubmit = (event) => {

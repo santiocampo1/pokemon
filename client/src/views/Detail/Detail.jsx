@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getById } from "../../redux/actions"
 
-
 const Detail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
