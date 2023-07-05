@@ -4,9 +4,9 @@ import Home from "./views/Home/Home";
 import Detail from "./views/Detail/Detail";
 import Create from "./views/Create/Create";
 import "./App.css";
-// Para hacer el deploy con Vercel.
+// Para hacer el deploy con Vercel y Railway .
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://pokemon-production-16ea.up.railway.app/";
 
 function App() {
   return (
