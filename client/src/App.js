@@ -4,6 +4,9 @@ import Home from "./views/Home/Home";
 import Detail from "./views/Detail/Detail";
 import Create from "./views/Create/Create";
 import "./App.css";
+// Para hacer el deploy con Vercel.
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (
