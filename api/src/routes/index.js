@@ -3,7 +3,7 @@ const pokemonRouter = require("./pokemonsRouter");
 const typeRouter = require("./typesRouter");
 
 const router = Router();
-// Configurar los routers:
+// Configurar los router:
 router.use("/pokemons", pokemonRouter);
 router.use("/types", typeRouter);
 
