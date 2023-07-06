@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../Cards/Cards";
 import { orderByName, orderByAttack, filterByType, filterByOrigin } from "../../redux/actions";
-import { useState } from "react";
 import styles from "./Filters.module.css"
 
-const Filters = () => {
+const Filters = ({ currentPage, setCurrentPage }) => {
     const dispatch = useDispatch();
     const allTypes = useSelector((state) => state.allTypes);
     const orderName = useSelector((state) => state.orderName);
@@ -35,7 +34,7 @@ const Filters = () => {
     };
 
     //* Paginado
-    const [currentPage, setCurrentPage] = useState(1)
+
 
     const cardsPerPage = 12;
 

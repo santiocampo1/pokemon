@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 import { getByName } from "../../redux/actions"
 import styles from "./Navbar.module.css"
 
-const Navbar = () => {
+const Navbar = ({ currentPage, setCurrentPage }) => {
 
     const dispatch = useDispatch()
 
@@ -18,6 +18,9 @@ const Navbar = () => {
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
+        if (currentPage !== 1) {
+            setCurrentPage(1)
+        }
         dispatch(getByName(searchString));
         setSearchString("")
     };
