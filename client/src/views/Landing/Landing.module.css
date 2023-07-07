@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "PokemonFont";
+  src: url("../../fonts/pokmon/Pokemon\ Solid.ttf") format("truetype");
+}
+
 .container {
   background-image: url("../../images/landingpoke.jpg");
   background-size: cover;
@@ -7,7 +12,7 @@
 }
 
 .titleContainer {
-  font-family: "Press Start 2P", cursive;
+  font-family: "PokemonFont", cursive;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
   border-radius: 8px;
@@ -15,7 +20,7 @@
 }
 
 .title {
-  color: rgb(248, 186, 0);
+  color: rgb(251, 255, 39);
   font-size: 36px;
   margin: 0;
 }
@@ -30,11 +35,10 @@
 .button {
   display: inline-block;
   text-decoration: none;
-  outline: none;
-  cursor: pointer;
   padding: 16px 24px;
   background-color: #ccff00;
   color: rgb(0, 0, 0);
+  font-family: "Press Start 2P", cursive;
   font-size: 20px;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
