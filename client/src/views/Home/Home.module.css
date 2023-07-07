@@ -35,14 +35,3 @@
   color: #68ff4d;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
-/* Estilos para pantallas de hasta 480px de ancho */
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 40px; /* Aumentamos el espacio interno para evitar solapamientos */
-  }
-
-  .homeTitle {
-    font-size: 24px; /* Reducimos el tamaño del título */
-  }
-}

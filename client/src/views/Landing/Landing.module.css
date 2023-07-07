@@ -51,7 +51,6 @@
   right: 20px;
   transform: translate(0, -50%) scale(0.8);
 }
-
 .social {
   display: flex;
   justify-content: center;
@@ -75,34 +74,4 @@
 
 .button:hover {
   transform: scale(1.1);
-}
-
-/* Estilos para pantallas de hasta 480px de ancho */
-@media screen and (max-width: 480px) {
-  .container {
-    height: auto; /* Cambiamos la altura a auto para ajustarse al contenido */
-    padding: 20px; /* Agregamos un espacio interno */
-  }
-
-  .title {
-    font-size: 24px; /* Reducimos el tamaño del título */
-  }
-
-  .buttonContainer {
-    position: static; /* Quitamos la posición absoluta */
-    margin-top: 20px; /* Agregamos un margen superior para separar del título */
-    text-align: center; /* Centramos los botones */
-  }
-
-  .audioContainer {
-    position: static; /* Quitamos la posición fija */
-    transform: none; /* Quitamos la transformación */
-    width: 100%; /* Ajustamos el ancho al 100% */
-    text-align: center; /* Centramos el reproductor de audio */
-  }
-
-  .social {
-    position: static; /* Quitamos la posición fija */
-    padding-bottom: 40px; /* Agregamos un espacio inferior para evitar solapamientos */
-  }
 }
