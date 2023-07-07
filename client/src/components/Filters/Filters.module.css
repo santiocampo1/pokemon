@@ -1,4 +1,18 @@
 /* Estilos para las etiquetas y selectores */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .filters label {
   margin-right: 10px;
 }
@@ -8,6 +22,11 @@
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 3px;
+}
+
+/* Estilos para el contenedor de las cards */
+.cardsContainer {
+  margin-top: 20px;
 }
 
 /* Estilos para el contenedor del paginado */

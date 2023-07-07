@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cards from "../Cards/Cards";
 import { orderByName, orderByAttack, filterByType, filterByOrigin } from "../../redux/actions";
 import { useState } from "react";
-import styles from "./Filters.module.css"
+import styles from "./Filters.module.css";
 
 const Filters = () => {
     const dispatch = useDispatch();
@@ -35,57 +35,70 @@ const Filters = () => {
     };
 
     //* Paginado
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1);
 
     const cardsPerPage = 12;
 
-    const indexOfLastCard = currentPage * cardsPerPage
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
     const getCurrentPageCards = (cards) => {
         if (Array.isArray(cards)) {
-            return cards.slice(indexOfFirstCard, indexOfLastCard)
+            return cards.slice(indexOfFirstCard, indexOfLastCard);
         }
-    }
+    };
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={styles.filters}>
-                <label>Ordenar pokemons según su nombre</label>
-                <select onChange={handleOrderByName}>
-                    <option defaultChecked value="-">
-                        -
-                    </option>
-                    <option value="descendente">A-Z</option>
-                    <option value="ascendente">Z-A</option>
-                </select>
+                <div className={styles.filterRow}>
+                    <div>
+                        <label>Ordenar pokemons según su nombre</label>
+                        <select onChange={handleOrderByName}>
+                            <option defaultChecked value="-">
+                                -
+                            </option>
+                            <option value="descendente">A-Z</option>
+                            <option value="ascendente">Z-A</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Ordenar pokemons según su valor de ataque</label>
+                        <select onChange={handleOrderByAttack}>
+                            <option defaultChecked value="-">
+                                -
+                            </option>
+                            <option value="descendente">De menos a más</option>
+                            <option value="ascendente">De más a menos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Filtrar por Tipo</label>
+                        <select onChange={handleFilterByType}>
+                            <option defaultChecked value="-">
+                                -
+                            </option>
+                            {allTypes.map((tipo) => {
+                                return (
+                                    <option key={tipo.name} value={tipo.name}>
+                                        {tipo.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                    <div>
+                        <label>Filtrar por Origen</label>
+                        <select onChange={handleFilterByOrigin}>
+                            <option value="-">-</option>
+                            <option value="Base de datos">Base de datos</option>
+                            <option value="API">API</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-                <label>Ordenar pokemons según su valor de ataque</label>
-                <select onChange={handleOrderByAttack}>
-                    <option defaultChecked value="-">
-                        -
-                    </option>
-                    <option value="descendente">De menos a más</option>
-                    <option value="ascendente">De más a menos</option>
-                </select>
-
-                <label>Filtrar por Tipo</label>
-                <select onChange={handleFilterByType}>
-                    <option defaultChecked value="-">
-                        -
-                    </option>
-                    {allTypes.map((tipo) => {
-                        return <option key={tipo.name} value={tipo.name}>{tipo.name}</option>;
-                    })}
-                </select>
-
-                <label>Filtrar por Origen</label>
-                <select onChange={handleFilterByOrigin}>
-                    <option value="-">-</option>
-                    <option value="Base de datos">Base de datos</option>
-                    <option value="API">API</option>
-                </select>
-
+            <div className={styles.cardsContainer}>
                 {orderName && <Cards allPokemons={getCurrentPageCards(pokemonsOrderedByName)} />}
                 {orderAttack && <Cards allPokemons={getCurrentPageCards(pokemonsOrderedByAttack)} />}
                 {filterType && <Cards allPokemons={getCurrentPageCards(pokemonsFiltered)} />}

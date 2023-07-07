@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "PokemonFont";
+  src: url("../../fonts/pokmon/Pokemon\ Solid.ttf") format("truetype");
+}
+
 .container {
   background-image: url("../../images/home.webp");
   background-size: cover;
@@ -16,4 +21,17 @@
   justify-content: center;
   height: 100%;
   padding: 20px;
+}
+
+.homeTitle {
+  font-family: "PokemonFont", cursive;
+  font-size: 36px;
+  transition: font-size 0.3s ease-in-out;
+  cursor: default;
+}
+
+.homeTitle:hover {
+  font-size: 40px;
+  color: #68ff4d;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }

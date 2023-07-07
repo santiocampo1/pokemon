@@ -27,7 +27,7 @@ const Home = () => {
                 <Loading />
             ) : (
                 <div className={styles.contentWrapper}>
-                    <h1>PokeHome</h1>
+                    <h1 className={styles.homeTitle}>PokeHome</h1>
                     <Navbar />
                     <Filters />
                 </div>
