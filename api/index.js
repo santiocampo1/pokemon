@@ -25,6 +25,6 @@ const { PORT } = process.env;
 // force is to reset my database
 conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {
-    console.log("%s listening at", PORT); // eslint-disable-line no-console
+    console.log("Listening at", PORT); // eslint-disable-line no-console
   });
 });
